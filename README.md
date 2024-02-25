@@ -20,3 +20,15 @@ Front: HTML, CSS3, JS<br>
 <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/6a74ecb6-8845-4c6e-ac67-eb08af8d02e2" width="600" height="400" alt="요구사항 정의서"/>
 </div>
 </details>
+<br>
+<details>
+<summary>[ERD](https://www.erdcloud.com/d/87t6dhQJQXXFwyN98)</summary>
+<div markdown="1">
+</div>
+</details>
+<br>
+<details>
+<summary>[Flow chart](https://www.canva.com/design/DAFy5DPNmbU/1s5399_q_14I6c-TSU9hxg/edit)</summary>
+<div markdown="1">
+</div>
+</details>
