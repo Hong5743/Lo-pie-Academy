@@ -21,7 +21,6 @@ Front: HTML, CSS3, JS<br>
 </div>
 </details>
 <br>
-<br>
 [ERD](https://www.erdcloud.com/d/87t6dhQJQXXFwyN98)
 <br>
 <br>
