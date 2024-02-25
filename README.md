@@ -9,8 +9,8 @@
 * 프로젝트 목적: 협업능력 향상 및 API 사용법 숙달
 
 ## 2. 기술 스택
-Back: JAVA, SPRING BOOT, MYBATIS, MYSQL
-Front: HTML, CSS3, JS
-협업: Git-hub, Notion<https://www.notion.so/Lo-Pie-6af789c9063843fd8fbc2669c6278372/>
+Back: JAVA, SPRING BOOT, MYBATIS, MYSQL<br>
+Front: HTML, CSS3, JS<br>
+협업: Git-hub, [Notion](https://www.notion.so/Lo-Pie-6af789c9063843fd8fbc2669c6278372)<br>
 
   
