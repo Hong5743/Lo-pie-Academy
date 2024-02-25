@@ -16,4 +16,4 @@ Front: HTML, CSS3, JS<br>
 ## 3. 프로젝트 산춘물
 
 ### [요구사항 정의서](https://docs.google.com/spreadsheets/d/18fmBbhwZKClWZBWMEcxrZC0NJB8ZXZBi/edit#gid=482328230)
-<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/6a74ecb6-8845-4c6e-ac67-eb08af8d02e2" width="200" height="200" alt="요구사항 정의서"/>
+<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/6a74ecb6-8845-4c6e-ac67-eb08af8d02e2" width="500" height="500" alt="요구사항 정의서"/>
