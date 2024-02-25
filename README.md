@@ -11,6 +11,9 @@
 ## 2. 기술 스택
 Back: JAVA, SPRING BOOT, MYBATIS, MYSQL<br>
 Front: HTML, CSS3, JS<br>
-협업: Git-hub, [Notion](https://www.notion.so/Lo-Pie-6af789c9063843fd8fbc2669c6278372)<br>
+협업: [Git-hub](https://github.com/Jlostcode/LPuniv), [Notion](https://www.notion.so/Lo-Pie-6af789c9063843fd8fbc2669c6278372)<br>
 
-  
+## 3. 프로젝트 산춘물
+
+### [요구사항 정의서](https://docs.google.com/spreadsheets/d/18fmBbhwZKClWZBWMEcxrZC0NJB8ZXZBi/edit#gid=482328230)
+<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/6a74ecb6-8845-4c6e-ac67-eb08af8d02e2" width="50" height="50"/ alt="요구사항 정의서">
