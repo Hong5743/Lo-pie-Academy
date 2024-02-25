@@ -21,14 +21,9 @@ Front: HTML, CSS3, JS<br>
 </div>
 </details>
 <br>
-<details>
-<summary>[ERD](https://www.erdcloud.com/d/87t6dhQJQXXFwyN98)</summary>
-<div markdown="1">
-</div>
-</details>
 <br>
-<details>
-<summary>[Flow chart](https://www.canva.com/design/DAFy5DPNmbU/1s5399_q_14I6c-TSU9hxg/edit)</summary>
+[ERD](https://www.erdcloud.com/d/87t6dhQJQXXFwyN98)
+<br>
+<br>
+[Flow chart](https://www.canva.com/design/DAFy5DPNmbU/1s5399_q_14I6c-TSU9hxg/edit)
 <div markdown="1">
-</div>
-</details>
