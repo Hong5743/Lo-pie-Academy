@@ -27,7 +27,9 @@ Front: HTML, CSS3, JS<br>
 
 ## 4. 구현 기능
 
-1. (관리자)수강생 강의 등록
+<details>
+<summary>1. (관리자)수강생 강의 등록</summary>
+<div markdown="1">
    프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
    Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.
 ```
@@ -53,4 +55,21 @@ Front: HTML, CSS3, JS<br>
         return "redirect:/stuLec/stuList";
     }
 ```
+처음 리스트 형식으로 체크박스의 값을 받지 않았을 때에는 다중 선택을 하면 오류가 발생하여, 체크박스 선택 시 리스트 형식으로 데이터를 받아와 다중 선택 기능 구현하였습니다.
+</div>
+</details>
+<br>
+2. (학생)메인 페이지 및 수강 정보
+```
+@GetMapping("/lecInfo")
+    public String getLecInfo(Model model, HttpSession session) {
+        AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
+        int stud_no = authInfo.getUser_no();
+        List<LecDto> listenLecDtos = lecInfoService.listenLecList(stud_no);
+        model.addAttribute("listenLecDtos", listenLecDtos);
+        return "minho/listenLec/lecInfo";
+    }
+```
+로그인이 성공하게 되면 세션에 저장되는 사용자 번호를 토대로 DB 에서 해당 수강생이 듣는 강의들을 리스트 형식으로 가져오게 하였습니다.
+
 
