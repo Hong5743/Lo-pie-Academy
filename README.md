@@ -79,6 +79,28 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 </details>
 
 <details>
- <summary>3. (학생)수강 정보 리스트
- </summary>
+ <summary>3. (학생)수강 정보 리스트</summary>
+ <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/abab3cba-2ffe-41fd-acc0-5b47d0730cfa" width="600" height="400" alt="메인 페이지 및 수강 정보"/>
+ 
+```
+ @GetMapping("/lecList")
+    public String getLecList(Model model, @RequestParam("occ_NO") int occ_NO,
+                             HttpSession session) {
+        List<LecListDto> lectList = lectListService.selectLecList(occ_NO);
+        model.addAttribute("lectList", lectList);
+        AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
+        int stud_no = authInfo.getUser_no();
+        int countCcimNo = listenLecDao.countCcimNo(occ_NO);
+        int countSchsOcs = listenLecDao.countSchsOcs(stud_no, occ_NO);
+        Double stud_pg = (double) ((100/countCcimNo) * countSchsOcs);
+        lecVideoService.updateStudPg(stud_pg, stud_no, occ_NO);
+        LecDto lecDto = lecVideoService.selectOneClass(stud_no, occ_NO);
+        if (lecDto.getStud_pg() >= 80) {
+            lecVideoService.updateStudSt(stud_no, occ_NO, stud_pg);
+        }
+        return "minho/listenLec/lecList";
+    }
+```
+         
+이전 수강 정보 페이지에서 수강하러 가기를 클릭 시 이 페이지로 이동하게 되며 챕터 개수와 수강 완료한 강의를 select 하고 백분율을 계산하여 진도율 자동 업데이트합니다, 진도율이 80%가 넘어가 수료 가능이라고 DB에 업데이트가 되도록 하여 학생 스스로도 진도율을 확인할 수 있게 구현하였습니다.
 </details>
