@@ -61,8 +61,7 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 <br>
 <details>
 <summary>2. (학생)메인 페이지 및 수강 정보</summary>
- ![image](https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/5800f752-38ab-4bb2-976e-5cc31336019e)
-
+<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/5800f752-38ab-4bb2-976e-5cc31336019e" width="600" height="400" alt="요구사항 정의서"/>
  <br>
  
 ```
