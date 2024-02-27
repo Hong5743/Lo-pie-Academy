@@ -250,7 +250,9 @@ function onPlayerPlaybackRateChange(event) {
 
 유튜브 Iframe API의 'onYouTubeIframeAPIReady' 함수를 사용하여 사용하여 유튜브 영상 ID로 유튜브에 등록한 강의를 불러오게 하는 ‘onReady’ 이벤트와 영상 시간 제어를 돕는 ‘onStateChange’ 이벤트 영상의 배속 제어를 위한 ‘onPlayerPlaybackRateChange’ 이벤트, 3가지 이벤트를 설정하였습니다.
 <br>
+<br>
 onStateChange 함수에서는 5초마다 영상의 재생 시간을 기록하는 함수를 설정하였고 영상을 앞으로 돌려도 저장된 시간으로 되돌아가게 설정하였으며 일시정지를 하였을 시 5초마다 반복되는 기록이 멈추게 되며 일시 정지한 시간이 저장됩니다.
+<br>
 <br>
 수강 종료 버튼을 누르게 되면 requestPost 함수를 실행하여 저장할 데이터를 JavaScript를 통해 controller에 전송 후 영상 총 시간과 영상이 마지막으로 저장된 시간이 DB에 데이터가 업데이트 되게 설정하였습니다. 
 
@@ -279,6 +281,209 @@ onStateChange 함수에서는 5초마다 영상의 재생 시간을 기록하는
         }
         return "redirect:/listenLec/lecList?occ_NO="+occ_NO;
     }
+```
+
+</details>
+<details>
+ <summary>5. 과제 제출</summary>
+Spring boot의 내장된 MultipartFile을 이용하여 파일을 첨부하면 저장될 디렉토리 설정해 주었으며 파일이 보여질 이름을 UUID로 설정하였습니다.
+
+```
+@Service
+public class FileServiceMH {
+    @Autowired
+    FileDaoMH fileDaoMH;
+    
+    private static final String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\minho\\files\\";//저장될 디렉토리 생성및 설정
+
+    public void insertFile(MultipartFile file, int submit_no) throws IOException {
+        if (file != null && !file.isEmpty()) {
+            // 파일 처리 로직을 구현합니다.
+            // 예를 들어, 파일을 저장하거나 데이터베이스에 연동하는 등의 작업을 수행합니다.
+            FileDtoMH fileDtoMH = new FileDtoMH();
+            UUID uuid = UUID.randomUUID();
+            String fileoriginname = file.getOriginalFilename();
+            String filename = uuid + "_" + file.getOriginalFilename();
+            int filesize = (int) file.getSize();
+            File savefile = new File(path, filename);
+            file.transferTo(savefile);//세이브 파일 경로에 저장하라는 명령어
+
+            fileDtoMH.setSubmit_no(submit_no);
+            fileDtoMH.setFile_uuid(filename);
+            fileDtoMH.setFile_path(path + filename);
+            fileDtoMH.setFile_nm(fileoriginname);
+            fileDtoMH.setFile_cp(filesize);
+
+            fileDaoMH.insertFile(fileDtoMH);
+        }
+    }
+```
+
+Spring boot MultipartFile을 List 형식으로 받아 다중 파일 첨부가 가능하게 구현하였으며, 과제의 파일을 첨부하지 않는 것을 대비해 파일을 첨부하지 않으면 빈 리스트로 초기화하여 파일을 첨부하지 않아도 과제가 제출되는 로직을 컨트롤러에 사용하였으며 드롭존의 사용을 위해 JavaScript를 사용하였습니다.
+
+```
+//Controller
+@PostMapping("/send")
+    public String postSubmit(@RequestParam(name = "files", required = false) List<MultipartFile> files,
+                             @RequestParam("stud_no") int stud_no, @RequestParam("occ_no") int occ_no,
+                             @RequestParam("amc_no") int amc_no, @RequestParam("submit_ct") String submit_ct
+    ) throws IOException {
+        try {
+            if (files == null) {
+                files = Collections.emptyList();//파일이 전송되지 않은 경우 빈 리스트로 초기화
+            }
+            SubmitDto submitDto = new SubmitDto();
+            submitDto.setStud_no(stud_no);
+            submitDto.setOcc_NO(occ_no);
+            submitDto.setAmc_no(amc_no);
+            submitDto.setSubmit_ct(submit_ct);
+            submitService.insertSubmit(submitDto);
+
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    int submit_no = submitService.selectSubmit();
+                    fileServiceMH.insertFile(file, submit_no);
+                }
+            }
+            return "redirect:/amc/amcView?amc_no=" + amc_no;
+        } catch (NullPointerException e) {
+            return "errorPage";
+        }
+    }
+```
+
+```
+Dropzone.autoDiscover = false;
+
+
+$(document).ready(function () {
+
+    // Dropzone 설정
+    var dropzone = new Dropzone("#dropzoneForm", {
+        url: "/submit/send",
+        method: "post",
+        autoProcessQueue: false, // 자동으로 보내기. true : 파일 업로드 되자마자 서버로 요청, false : 서버에는 올라가지 않은 상태.
+        paramName: "files",  // 파일 파라미터 이름
+        uploadMultiple: true,  // 다중 파일 업로드 활성화
+        maxFiles: 5,  // 최대 업로드 파일 수
+        maxFilesize: 5,  // 최대 파일 크기 (MB)
+        parallelUploads: 5,  // 병렬 업로드 수
+        dictDefaultMessage: "파일을 여기에 드래그하세요 또는 클릭하세요. 최대 파일 갯수 : 5개",  // 기본 메시지
+        dictRemoveFile: "파일 삭제",  // 파일 삭제 버튼 텍스트
+        addRemoveLinks: true,  // 파일 추가/삭제 링크 표시 여부
+        dictMaxFilesExceeded: "더 이상 파일을 업로드할 수 없습니다.",  // 최대 파일 개수 초과 시 메시지
+        init: function () {
+            this.on("maxfilesexceeded", function (file) {
+                // 최대 파일 업로드 개수 초과 시 동작
+                showAlert("최대 5개까지만 업로드 가능합니다.");
+                this.removeFile(file); // 초과된 파일 제거
+            });
+            this.on("complete", function (file) {
+                // 업로드가 완료된 후의 동작
+                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                    // 모든 파일 업로드가 완료되었을 때, 추가 동작을 수행하거나 폼 제출 등
+                    this.removeAllFiles(); // 모든 파일 제거
+                }
+            });
+        }
+    });
+// Dropzone의 파일 업로드와 관련된 이벤트 핸들러 등록
+    dropzone.on("sending", function (file, xhr, formData) {
+        // 파일이 업로드되기 전의 동작
+        // 추가적인 데이터를 formData에 추가할 수 있음
+        if (!formData.has("occ_no")) {
+            formData.append("occ_no", document.getElementsByName("occ_no")[0].value);
+        }
+        if (!formData.has("stud_no")) {
+            formData.append("stud_no", document.getElementsByName("stud_no")[0].value);
+        }
+        if (!formData.has("amc_no")) {
+            formData.append("amc_no", document.getElementsByName("amc_no")[0].value);
+        }
+        if (!formData.has("submit_ct")) {
+            formData.append("submit_ct", document.getElementsByName("submit_ct")[0].value);
+        }
+        formData.append("files", file);
+
+    });
+    dropzone.on("success", function (file, response) {
+        // 업로드가 완료된 후의 동작
+        // 서버에서 전달받은 응답(response)를 확인하여 추가 동작 수행 가능
+        console.log("테스트 확인 입니다.");
+        // 폼을 서버에 제출
+        $("#insert_form").submit();
+        window.location.href = '/amc/amcView' + '?amc_no=' + document.getElementsByName("amc_no")[0].value;
+    });
+// 기타 Dropzone 이벤트 등록 가능
+    $("#insert_form").submit(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        dropzone.processQueue(); // Dropzone에 파일 업로드 수행
+    });
+});
+
+function submitAmfi() {
+    let dropzone = Dropzone.forElement("#dropzoneForm");
+    let form = document.querySelector('form');
+
+    if (dropzone.getQueuedFiles().length === 0) {
+        // 파일이 없는 경우
+        Swal.fire({
+            title: "파일이 없습니다.",
+            text: "등록된 파일이 없습니다. 과제만 등록하시겠습니까?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 확인을 눌렀을 때의 동작 (예를 들어, 과제 등록)
+                console.log("과제 등록");
+                if (checkNullAmc()) {
+                    form.submit();
+                    // 여기에 추가적인 동작을 추가하십시오.
+                }
+            } else {
+                // 아니오를 눌렀을 때의 동작 (예를 들어, 다른 동작 수행)
+                console.log("사용자가 아니오를 선택했습니다.");
+            }
+        });
+    } else {
+        // 파일이 있는 경우
+        Swal.fire({
+            title: "파일이 등록되었습니다.",
+            text: "파일이 등록되어 있습니다. 과제 등록하시겠습니까?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "예",
+            cancelButtonText: "아니오"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 확인을 눌렀을 때의 동작 (예를 들어, 과제 등록)
+                if (checkNullAmc()) {
+                    dropzone.processQueue();
+                    // 여기에 추가적인 동작을 추가하십시오.
+                }
+                console.log("과제 등록");
+                // 여기에 추가적인 동작을 추가하십시오.
+            } else {
+                // 아니오를 눌렀을 때의 동작 (예를 들어, 다른 동작 수행)
+                console.log("사용자가 아니오를 선택했습니다.");
+            }
+        });
+    }
+}
+
+function showAlert(message) {
+    Swal.fire({
+        icon: 'warning',
+        iconColor: '#12192c',
+        title: '알림',
+        text: message,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: '확인'
+    });
+}
 ```
 
 </details>
