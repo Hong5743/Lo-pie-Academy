@@ -20,7 +20,9 @@ Front: HTML, CSS3, JS<br>
 <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/6a74ecb6-8845-4c6e-ac67-eb08af8d02e2" width="600" height="400" alt="요구사항 정의서"/>
 </div>
 </details>
+<details>
 <summary>[ERD](https://www.erdcloud.com/d/87t6dhQJQXXFwyN98)</summary>
+ </details>
 <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/597de8da-0488-4e9b-9eb3-5c8807aef841" width="600" height="400" alt="ERD"/>
 
 <br>
