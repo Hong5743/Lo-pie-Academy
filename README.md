@@ -24,3 +24,33 @@ Front: HTML, CSS3, JS<br>
 <br>
 [Flow chart](https://www.canva.com/design/DAFy5DPNmbU/1s5399_q_14I6c-TSU9hxg/edit)
 <div markdown="1">
+
+## 4. 구현 기능
+
+1. (관리자)수강생 강의 등록
+   프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
+   Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.
+```
+//Controller 코드
+ @PostMapping("/stuList")
+    public String uploadStu(@RequestParam(value = "stud_no[]") List<Integer> stud_no,
+                            @RequestParam(value = "occ_NO[]") List<Integer> occ_NO) {
+        System.out.println("stud_no : " + stud_no);
+        System.out.println("occ_NO : " + occ_NO);
+        for (Integer stu : stud_no) {
+            for (Integer integer : occ_NO) {
+                StudentLecDto studentLecDto = studentLecService.selectClass(stu, integer);
+                System.out.println("studentLecDto========================"+studentLecDto);
+                if (studentLecDto == null) {
+                    studentLecService.insertClass(stu, integer);
+                } else {
+                    stud_no = null;
+                    occ_NO = null;
+                    return "null";
+                }
+            }
+        }
+        return "redirect:/stuLec/stuList";
+    }
+```
+
