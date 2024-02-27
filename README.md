@@ -29,9 +29,9 @@ Front: HTML, CSS3, JS<br>
 
 <details>
 <summary>1. (관리자)수강생 강의 등록</summary>
+프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
+Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.<br>
 <div markdown="1">
-   프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
-   Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.<br>
 ```TypeScript
 //Controller 코드
  @PostMapping("/stuList")
