@@ -29,6 +29,8 @@ Front: HTML, CSS3, JS<br>
 
 <details>
 <summary>1. (관리자)수강생 강의 등록</summary><br>
+ <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/133327b0-e66d-4c4d-9e06-fef3072954a6" width="600" height="400" alt="메인 페이지 및 수강 정보"/>
+
 프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
 Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.<br>
 
@@ -58,10 +60,9 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 처음 리스트 형식으로 체크박스의 값을 받지 않았을 때에는 다중 선택을 하면 오류가 발생하여, 체크박스 선택 시 리스트 형식으로 데이터를 받아와 다중 선택 기능 구현하였습니다.
 
 </details>
-<br>
 <details>
 <summary>2. (학생)메인 페이지 및 수강 정보</summary>
-<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/5800f752-38ab-4bb2-976e-5cc31336019e" width="600" height="400" alt="요구사항 정의서"/>
+<img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/5800f752-38ab-4bb2-976e-5cc31336019e" width="600" height="400" alt="메인 페이지 및 수강 정보"/>
  <br>
  
 ```
