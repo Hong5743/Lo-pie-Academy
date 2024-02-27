@@ -80,7 +80,7 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 
 <details>
  <summary>3. (학생)수강 정보 리스트</summary>
- <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/abab3cba-2ffe-41fd-acc0-5b47d0730cfa" width="600" height="400" alt="메인 페이지 및 수강 정보"/>
+ <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/abab3cba-2ffe-41fd-acc0-5b47d0730cfa" width="600" height="400" alt="수강 정보 리스트"/>
  
 ```
  @GetMapping("/lecList")
@@ -286,6 +286,8 @@ onStateChange 함수에서는 5초마다 영상의 재생 시간을 기록하는
 </details>
 <details>
  <summary>5. 과제 제출</summary>
+ <img src="https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/964b2a30-fcd9-4d1a-9b97-8aea76554618" width="600" height="400" alt="과제 제출"/>
+
 Spring boot의 내장된 MultipartFile을 이용하여 파일을 첨부하면 저장될 디렉토리 설정해 주었으며 파일이 보여질 이름을 UUID로 설정하였습니다.
 
 ```
