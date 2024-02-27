@@ -61,6 +61,8 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 <br>
 <details>
 <summary>2. (학생)메인 페이지 및 수강 정보</summary>
+ ![image](https://github.com/Hong5743/Lo-pie-Academy/assets/136396772/5800f752-38ab-4bb2-976e-5cc31336019e)
+
  <br>
  
 ```
@@ -76,4 +78,7 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 로그인이 성공하게 되면 세션에 저장되는 사용자 번호를 토대로 DB 에서 해당 수강생이 듣는 강의들을 리스트 형식으로 가져오게 하였습니다.
 </details>
 
-
+<details>
+ <summary>3. (학생)수강 정보 리스트
+ </summary>
+</details>
