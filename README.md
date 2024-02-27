@@ -28,7 +28,7 @@ Front: HTML, CSS3, JS<br>
 ## 4. 구현 기능
 
 <details>
-<summary>1. (관리자)수강생 강의 등록</summary>
+<summary>1. (관리자)수강생 강의 등록</summary><br>
 프로젝트의 수강생 명단과 수강 정보를 HRD-NET에서 엑셀 파일로 받는다고 가정을 하고 진행하였기에,<br>
 Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되었습니다.<br>
 
@@ -59,7 +59,9 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 
 </details>
 <br>
-2. (학생)메인 페이지 및 수강 정보
+<details>
+<summary>2. (학생)메인 페이지 및 수강 정보</summary>
+ <br>
 ```
 @GetMapping("/lecInfo")
     public String getLecInfo(Model model, HttpSession session) {
@@ -71,5 +73,6 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
     }
 ```
 로그인이 성공하게 되면 세션에 저장되는 사용자 번호를 토대로 DB 에서 해당 수강생이 듣는 강의들을 리스트 형식으로 가져오게 하였습니다.
+</details>
 
 
