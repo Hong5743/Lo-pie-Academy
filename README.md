@@ -62,6 +62,7 @@ Lo-Pie-Academy에서 진행되는 수강 신청은 관리자만의 기능이 되
 <details>
 <summary>2. (학생)메인 페이지 및 수강 정보</summary>
  <br>
+ 
 ```
 @GetMapping("/lecInfo")
     public String getLecInfo(Model model, HttpSession session) {
